@@ -3,58 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sync AI | Persona Bot</title>
+    <title>Sync | AI Persona</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-container">
-        <header>
+    <div class="app-shell">
+        <header class="sync-header">
             <div class="logo">Sync</div>
-            <div class="sub-header">
-                <span class="icon">💬</span> AI ASSISTANT
-            </div>
+            <div class="ai-tag">AI-POWERED • BUILT FOR STUDENTS</div>
             <h1>Chat with Sync</h1>
-            <p class="tagline">Ask anything — your AI assistant understands context and responds like a study buddy.</p>
+            <p>Your AI assistant understands context and responds like a study buddy.</p>
         </header>
 
-        <div id="chat-window">
-            <div class="chat-wrapper" id="chat-wrapper">
-                <div class="bot-profile">
-                    <div class="avatar">S</div>
-                    <div class="profile-info">
-                        <span class="name">Sync AI</span>
-                        <span class="status"><span class="dot"></span> Online now</span>
-                    </div>
-                    <span class="badge">Agentic AI</span>
+        <main id="chat-container">
+            <div class="sync-bot-profile">
+                <div class="avatar">S</div>
+                <div class="info">
+                    <span class="name">Sync AI</span>
+                    <span class="status">Online now</span>
                 </div>
-
-                <div id="messages">
-                    <div class="message bot">
-                        Hi Aryan! I'm your Sync AI. How can I help you manage your student life today?
-                    </div>
-                </div>
+                <span class="badge">Agentic AI</span>
             </div>
+
+            <div id="chat-history">
+                <div class="msg bot-msg">Hey Aryan! I'm synced up. What's on the agenda today?</div>
+            </div>
+        </main>
+
+        <div class="pills-container">
+            <button onclick="quickAsk('Plan my study schedule')">Plan study</button>
+            <button onclick="quickAsk('Show my expenses')">Show expenses</button>
+            <button onclick="quickAsk('What deadlines do I have?')">Deadlines</button>
         </div>
 
-        <div class="quick-actions">
-            <button onclick="sendQuick('Plan my study schedule')">Plan study schedule</button>
-            <button onclick="sendQuick('Show my expenses')">Show my expenses</button>
-            <button onclick="sendQuick('What deadlines do I have?')">What deadlines?</button>
-            <button onclick="sendQuick('Set a bill reminder')">Set bill reminder</button>
-        </div>
-
-        <div class="input-container">
+        <div class="input-wrapper">
             <input type="text" id="user-input" placeholder="Message Sync..." autocomplete="off">
             <button id="send-btn">➔</button>
         </div>
 
         <nav class="bottom-nav">
-            <div class="nav-item">🏠<span>Home</span></div>
-            <div class="nav-item">📊<span>Dash</span></div>
-            <div class="nav-item active">💬<span>AI Chat</span></div>
-            <div class="nav-item">📅<span>Plan</span></div>
-            <div class="nav-item">💰<span>Spend</span></div>
+            <div class="nav-item">🏠</div>
+            <div class="nav-item">📊</div>
+            <div class="nav-item active">💬</div>
+            <div class="nav-item">📅</div>
+            <div class="nav-item">💰</div>
         </nav>
     </div>
 
