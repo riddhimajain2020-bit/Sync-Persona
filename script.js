@@ -1,97 +1,144 @@
-/**
- * ARYAN PERSONA BOT - LOGIC ENGINE
- * Designed for: https://dulcet-cheesecake-b7bddd.netlify.app/
- */
-
-const input = document.getElementById('user-input');
-const history = document.getElementById('history');
-
-// 1. DATA BANK: Keywords grouped by category
-const responseData = {
-    greetings: {
-        keywords: ["hi", "hello", "hey", "hola", "yo", "good morning", "good evening"],
-        reply: "Hey! Aryan here. Ready to stay 'in sync' with my student life?"
-    },
-    identity: {
-        keywords: ["who are you", "your name", "tell me about yourself", "who is aryan"],
-        reply: "I'm Aryan, a CS student. I'm a builder who uses AI to simplify the chaos of college."
-    },
-    origin: {
-        keywords: ["where", "from", "live", "location", "country"],
-        reply: "I'm a student developer based in India, coding my way through university."
-    },
-    sync_concept: {
-        keywords: ["what is sync", "sync up", "how does it work", "define sync", "agentic ai"],
-        reply: "SYNC is my AI-powered personal manager. It's one system that handles study plans, money, and time so I don't have to."
-    },
-    goals: {
-        keywords: ["goal", "aim", "future", "career", "want to be", "vision"],
-        reply: "My goal is to graduate stress-free and build tools that solve real-world problems. SYNC is the first step."
-    },
-    money: {
-        keywords: ["money", "cash", "expense", "budget", "spend", "bills", "financial", "broke"],
-        reply: "I use SYNC to track every penny. It gives me a 'warning' before I overspend on coffee or snacks."
-    },
-    studies: {
-        keywords: ["study", "exam", "homework", "class", "grades", "test", "deadline", "notes"],
-        reply: "SYNC organizes my study schedule. It looks at my deadlines and plans my sessions automatically."
-    },
-    pain_points: {
-        keywords: ["pain", "problem", "hate", "struggle", "mess", "clutter", "too many apps"],
-        reply: "I hate 'App Fatigue'—switching between 5 apps for 5 tasks is a mess. SYNC puts it all in one place."
-    },
-    technology: {
-        keywords: ["tech", "code", "language", "stack", "build", "javascript", "react"],
-        reply: "I love the MERN stack! I'm always looking for ways to integrate AI into clean, terminal-style web apps."
-    },
-    help: {
-        keywords: ["help", "commands", "what can i ask", "options"],
-        reply: "You can ask me about: My identity, SYNC (AI Assistant), Goals, Money management, or Study tips!"
-    }
-};
-
-// 2. LOGIC: The processing engine
-function getBotResponse(userInput) {
-    const cleanInput = userInput.toLowerCase().trim();
-
-    // Loop through our data bank to find a keyword match
-    for (const category in responseData) {
-        const item = responseData[category];
-        // Check if any keyword from the list exists in the user's input
-        if (item.keywords.some(keyword => cleanInput.includes(keyword))) {
-            return item.reply;
-        }
-    }
-
-    // Default response if no keywords match
-    return "That's an interesting question! I'm still training my SYNC agent on that, but ask me about my studies or how I manage money.";
+:root {
+    --bg-gradient: linear-gradient(180deg, #12121c 0%, #1a1a2e 100%);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --accent-purple: #9d50bb;
+    --accent-blue: #6e7aff;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --sync-teal: #00f2fe;
 }
 
-// 3. UI: Handling the input and terminal display
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && input.value.trim() !== "") {
-        const userText = input.value;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
 
-        // Create User Line
-        const userDiv = document.createElement('div');
-        userDiv.className = 'line';
-        userDiv.innerHTML = `<span class="user-label">➜ ~/persona</span> <span class="user-msg">${userText}</span>`;
-        history.appendChild(userDiv);
+.app-container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
 
-        // Clear input
-        input.value = "";
+header { margin-bottom: 20px; }
+.logo { font-size: 24px; font-weight: 800; color: var(--accent-blue); margin-bottom: 20px; }
+.sub-header { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 5px; }
+h1 { font-size: 28px; margin: 0; font-weight: 700; }
+.tagline { color: var(--text-dim); font-size: 14px; line-height: 1.4; }
 
-        // Scroll to bottom
-        history.scrollTop = history.scrollHeight;
+/* Chat Window */
+#chat-window {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+}
 
-        // Artificial delay for "Bot Thinking" effect
-        setTimeout(() => {
-            const botResponse = getBotResponse(userText);
-            const botDiv = document.createElement('div');
-            botDiv.className = 'line';
-            botDiv.innerHTML = `<span class="bot-label">Aryan:</span> <span>${botResponse}</span>`;
-            history.appendChild(botDiv);
-            history.scrollTop = history.scrollHeight;
-        }, 400);
-    }
-});
+.bot-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #6e7aff, #9d50bb);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.name { display: block; font-weight: 600; }
+.status { font-size: 11px; color: #4ade80; }
+.badge { margin-left: auto; font-size: 10px; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 10px; color: var(--text-dim); }
+
+/* Messages */
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bot { background: rgba(255,255,255,0.08); align-self: flex-start; border-bottom-left-radius: 4px; }
+.user { background: var(--accent-purple); align-self: flex-end; margin-left: auto; border-bottom-right-radius: 4px; }
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.quick-actions button {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Input */
+.input-container {
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 100px;
+    margin-bottom: 80px;
+}
+
+input {
+    background: transparent;
+    border: none;
+    color: white;
+    flex-grow: 1;
+    padding-left: 15px;
+    outline: none;
+}
+
+#send-btn {
+    background: var(--accent-blue);
+    border: none;
+    color: white;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Nav Bar */
+.bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: #0a0a12;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #222;
+}
+
+.nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--text-dim); }
+.nav-item.active { color: var(--accent-purple); }
