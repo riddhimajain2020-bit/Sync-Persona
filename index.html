@@ -1,56 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sync | AI Persona</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sync Persona Bot</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-shell">
-        <header class="sync-header">
-            <div class="logo">Sync</div>
-            <div class="ai-tag">AI-POWERED • BUILT FOR STUDENTS</div>
-            <h1>Chat with Sync</h1>
-            <p>Your AI assistant understands context and responds like a study buddy.</p>
-        </header>
+<div class="header">Sync AI</div>
 
-        <main id="chat-container">
-            <div class="sync-bot-profile">
-                <div class="avatar">S</div>
-                <div class="info">
-                    <span class="name">Sync AI</span>
-                    <span class="status">Online now</span>
-                </div>
-                <span class="badge">Agentic AI</span>
-            </div>
+<div class="chat-container">
+  <div class="messages" id="messages"></div>
 
-            <div id="chat-history">
-                <div class="msg bot-msg">Hey Aryan! I'm synced up. What's on the agenda today?</div>
-            </div>
-        </main>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Type your answer...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
 
-        <div class="pills-container">
-            <button onclick="quickAsk('Plan my study schedule')">Plan study</button>
-            <button onclick="quickAsk('Show my expenses')">Show expenses</button>
-            <button onclick="quickAsk('What deadlines do I have?')">Deadlines</button>
-        </div>
-
-        <div class="input-wrapper">
-            <input type="text" id="user-input" placeholder="Message Sync..." autocomplete="off">
-            <button id="send-btn">➔</button>
-        </div>
-
-        <nav class="bottom-nav">
-            <div class="nav-item">🏠</div>
-            <div class="nav-item">📊</div>
-            <div class="nav-item active">💬</div>
-            <div class="nav-item">📅</div>
-            <div class="nav-item">💰</div>
-        </nav>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
