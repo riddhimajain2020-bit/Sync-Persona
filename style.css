@@ -1,0 +1,130 @@
+/* 1. Global Reset & Theme */
+:root {
+    --bg-black: #0a0a0a;
+    --terminal-green: #00ff99;
+    --terminal-dim: rgba(0, 255, 153, 0.6);
+    --user-white: #e0e0e0;
+    --border-color: #222;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+}
+
+body {
+    background-color: var(--bg-black);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: var(--font-mono);
+    color: var(--terminal-green);
+    overflow: hidden;
+}
+
+/* 2. Main Terminal Container */
+#terminal {
+    width: 90%;
+    max-width: 750px;
+    height: 80vh;
+    background: #000;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 153, 0.03);
+    position: relative;
+}
+
+/* 3. Scanline Effect (The "Live" feel) */
+#terminal::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+/* 4. Output History Area */
+#history {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+/* Scrollbar Styling for Chrome/Safari */
+#history::-webkit-scrollbar { width: 4px; }
+#history::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+/* 5. Text Styling */
+.line {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.bot-label {
+    color: var(--terminal-green);
+    text-shadow: 0 0 8px var(--terminal-dim);
+    margin-right: 10px;
+}
+
+.user-label {
+    color: #555;
+    margin-right: 10px;
+}
+
+.user-msg {
+    color: var(--user-white);
+}
+
+/* 6. Input Section */
+.input-area {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.prompt {
+    color: var(--terminal-green);
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+input {
+    background: transparent;
+    border: none;
+    color: var(--terminal-green);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+input::placeholder {
+    color: #333;
+}
+
+/* 7. Simple Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. Responsive Adjustment */
+@media (max-width: 600px) {
+    #terminal {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 15px;
+    }
+}
