@@ -1,130 +1,144 @@
-/* 1. Global Reset & Theme */
 :root {
-    --bg-black: #0a0a0a;
-    --terminal-green: #00ff99;
-    --terminal-dim: rgba(0, 255, 153, 0.6);
-    --user-white: #e0e0e0;
-    --border-color: #222;
-    --font-mono: 'Fira Code', 'Courier New', monospace;
+    --bg-gradient: linear-gradient(180deg, #12121c 0%, #1a1a2e 100%);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --accent-purple: #9d50bb;
+    --accent-blue: #6e7aff;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --sync-teal: #00f2fe;
 }
 
 body {
-    background-color: var(--bg-black);
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
-    font-family: var(--font-mono);
-    color: var(--terminal-green);
     overflow: hidden;
 }
 
-/* 2. Main Terminal Container */
-#terminal {
-    width: 90%;
-    max-width: 750px;
-    height: 80vh;
-    background: #000;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 25px;
+.app-container {
+    width: 100%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 153, 0.03);
+    padding: 20px;
     position: relative;
 }
 
-/* 3. Scanline Effect (The "Live" feel) */
-#terminal::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-}
+header { margin-bottom: 20px; }
+.logo { font-size: 24px; font-weight: 800; color: var(--accent-blue); margin-bottom: 20px; }
+.sub-header { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 5px; }
+h1 { font-size: 28px; margin: 0; font-weight: 700; }
+.tagline { color: var(--text-dim); font-size: 14px; line-height: 1.4; }
 
-/* 4. Output History Area */
-#history {
+/* Chat Window */
+#chat-window {
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 15px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-color) transparent;
-}
-
-/* Scrollbar Styling for Chrome/Safari */
-#history::-webkit-scrollbar { width: 4px; }
-#history::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
-/* 5. Text Styling */
-.line {
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
     margin-bottom: 15px;
-    line-height: 1.6;
-    animation: fadeIn 0.3s ease-in;
 }
 
-.bot-label {
-    color: var(--terminal-green);
-    text-shadow: 0 0 8px var(--terminal-dim);
-    margin-right: 10px;
-}
-
-.user-label {
-    color: #555;
-    margin-right: 10px;
-}
-
-.user-msg {
-    color: var(--user-white);
-}
-
-/* 6. Input Section */
-.input-area {
+.bot-profile {
     display: flex;
     align-items: center;
-    border-top: 1px solid var(--border-color);
-    padding-top: 20px;
-    margin-top: 10px;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.prompt {
-    color: var(--terminal-green);
-    margin-right: 12px;
+.avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #6e7aff, #9d50bb);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
+}
+
+.name { display: block; font-weight: 600; }
+.status { font-size: 11px; color: #4ade80; }
+.badge { margin-left: auto; font-size: 10px; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 10px; color: var(--text-dim); }
+
+/* Messages */
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bot { background: rgba(255,255,255,0.08); align-self: flex-start; border-bottom-left-radius: 4px; }
+.user { background: var(--accent-purple); align-self: flex-end; margin-left: auto; border-bottom-right-radius: 4px; }
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.quick-actions button {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Input */
+.input-container {
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 100px;
+    margin-bottom: 80px;
 }
 
 input {
     background: transparent;
     border: none;
-    color: var(--terminal-green);
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    width: 100%;
+    color: white;
+    flex-grow: 1;
+    padding-left: 15px;
     outline: none;
 }
 
-input::placeholder {
-    color: #333;
+#send-btn {
+    background: var(--accent-blue);
+    border: none;
+    color: white;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-/* 7. Simple Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Nav Bar */
+.bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: #0a0a12;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #222;
 }
 
-/* 8. Responsive Adjustment */
-@media (max-width: 600px) {
-    #terminal {
-        width: 100%;
-        height: 100%;
-        border: none;
-        padding: 15px;
-    }
-}
+.nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--text-dim); }
+.nav-item.active { color: var(--accent-purple); }
