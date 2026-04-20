@@ -3,39 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan | SYNC Terminal</title>
+    <title>Sync AI | Persona Bot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="terminal">
-        
-        <div class="terminal-header">
-            <div class="buttons">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
+    <div class="app-container">
+        <header>
+            <div class="logo">Sync</div>
+            <div class="sub-header">
+                <span class="icon">💬</span> AI ASSISTANT
             </div>
-            <div class="title">aryan_persona_bot — bash</div>
+            <h1>Chat with Sync</h1>
+            <p class="tagline">Ask anything — your AI assistant understands context and responds like a study buddy.</p>
+        </header>
+
+        <div id="chat-window">
+            <div class="chat-wrapper" id="chat-wrapper">
+                <div class="bot-profile">
+                    <div class="avatar">S</div>
+                    <div class="profile-info">
+                        <span class="name">Sync AI</span>
+                        <span class="status"><span class="dot"></span> Online now</span>
+                    </div>
+                    <span class="badge">Agentic AI</span>
+                </div>
+
+                <div id="messages">
+                    <div class="message bot">
+                        Hi Aryan! I'm your Sync AI. How can I help you manage your student life today?
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="history">
-            <div class="line">
-                <span class="bot-label">SYSTEM:</span> 
-                <span class="typewriter">Booting SYNC OS... Done.</span>
-            </div>
-            <div class="line">
-                <span class="bot-label">Aryan:</span> 
-                <span>Hey! I'm Aryan. I use SYNC to handle my student life. Ask me anything or type 'help'.</span>
-            </div>
+        <div class="quick-actions">
+            <button onclick="sendQuick('Plan my study schedule')">Plan study schedule</button>
+            <button onclick="sendQuick('Show my expenses')">Show my expenses</button>
+            <button onclick="sendQuick('What deadlines do I have?')">What deadlines?</button>
+            <button onclick="sendQuick('Set a bill reminder')">Set bill reminder</button>
         </div>
 
-        <div class="input-area">
-            <span class="prompt">➜</span>
-            <span class="directory">~/persona</span>
-            <input type="text" id="user-input" placeholder="type a question..." autofocus autocomplete="off">
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Message Sync..." autocomplete="off">
+            <button id="send-btn">➔</button>
         </div>
 
+        <nav class="bottom-nav">
+            <div class="nav-item">🏠<span>Home</span></div>
+            <div class="nav-item">📊<span>Dash</span></div>
+            <div class="nav-item active">💬<span>AI Chat</span></div>
+            <div class="nav-item">📅<span>Plan</span></div>
+            <div class="nav-item">💰<span>Spend</span></div>
+        </nav>
     </div>
 
     <script src="script.js"></script>
