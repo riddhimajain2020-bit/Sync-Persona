@@ -1,52 +1,48 @@
-const msgContainer = document.getElementById('messages');
+const chatHistory = document.getElementById('chat-history');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 
-const responses = {
-    "hi": "Hey Aryan! I've analyzed your dashboard. You have 3 deadlines due tomorrow. Want me to clear your evening for study?",
-    "expenses": "Your spending this month is ₹1,920 out of a ₹5,000 budget — only 38% used. You're doing great! 💸",
-    "deadlines": "You have 'OS Assignment' due on Apr 14 and 'DBMS Lab Report' on Apr 16. Focus on OS today!",
-    "bills": "You have 4 bills pending, including Netflix (₹199). Should I schedule the payment for you?",
-    "study": "I've blocked out 2pm to 4pm for your OS Lab work today. I'll silence your notifications then! 🧠",
-    "default": "I'm on it! I'll update your Sync dashboard and keep everything organized for you."
+const data = {
+    "hi": "Good morning, Aryan! Your Sync dashboard is ready. You have 5 tasks today. 🚀",
+    "expenses": "You've spent ₹1,920 this month (38% of your ₹5,000 budget). You still have ₹3,080 left. Looking good! 💰",
+    "deadlines": "Urgent: OS Assignment submission is tomorrow (Apr 14). DBMS Lab is on Apr 16. Don't skip the OS lab code! 📅",
+    "bills": "Upcoming: Netflix (₹199) is due tomorrow. Gym Membership (₹800) is due on Apr 18. 💳",
+    "study": "I've planned your day: Algorithms at 9am, OS Lab at 2pm. Ready to get started? 🧠",
+    "default": "I'm on it. I've synced that to your dashboard."
 };
 
-function addMessage(text, sender) {
+function addMessage(text, type) {
     const div = document.createElement('div');
-    div.className = `message ${sender}`;
-    div.textContent = text;
-    msgContainer.appendChild(div);
-    document.getElementById('chat-window').scrollTop = document.getElementById('chat-window').scrollHeight;
+    div.className = `msg ${type}-msg`;
+    div.innerText = text;
+    chatHistory.appendChild(div);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
-function handleResponse(text) {
-    const input = text.toLowerCase();
-    let reply = responses.default;
+function botLogic(input) {
+    const msg = input.toLowerCase();
+    let reply = data.default;
 
-    if (input.includes("hi") || input.includes("hello")) reply = responses.hi;
-    else if (input.includes("expense") || input.includes("spend") || input.includes("money")) reply = responses.expenses;
-    else if (input.includes("deadline") || input.includes("task")) reply = responses.deadlines;
-    else if (input.includes("bill") || input.includes("pay")) reply = responses.bills;
-    else if (input.includes("study") || input.includes("plan")) reply = responses.study;
+    if (msg.includes("hi") || msg.includes("hello")) reply = data.hi;
+    else if (msg.includes("expense") || msg.includes("spend") || msg.includes("money")) reply = data.expenses;
+    else if (msg.includes("deadline") || msg.includes("task")) reply = data.deadlines;
+    else if (msg.includes("bill") || msg.includes("pay")) reply = data.bills;
+    else if (msg.includes("study") || msg.includes("plan")) reply = data.study;
 
-    setTimeout(() => addMessage(reply, 'bot'), 600);
+    setTimeout(() => addMessage(reply, 'bot'), 500);
 }
 
-sendBtn.addEventListener('click', () => {
-    if (userInput.value.trim() !== "") {
-        const text = userInput.value;
-        addMessage(text, 'user');
-        handleResponse(text);
+sendBtn.onclick = () => {
+    if (userInput.value) {
+        addMessage(userInput.value, 'user');
+        botLogic(userInput.value);
         userInput.value = "";
     }
-});
+};
 
-userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendBtn.click();
-});
-
-// For the quick action buttons
-function sendQuick(text) {
+function quickAsk(text) {
     addMessage(text, 'user');
-    handleResponse(text);
+    botLogic(text);
 }
+
+userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendBtn.onclick(); });
